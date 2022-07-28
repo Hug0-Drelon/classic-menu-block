@@ -29,6 +29,8 @@ const { name } = metadata;
 export default function Edit({ setAttributes, attributes, isSelected }) {
 	const { menu = 0 } = attributes || {};
 
+	const { language = 0 } = attributes || {};
+
 	const { menus, hasMenus } = useNavigationEntities();
 
 	const options = [{ value: 0, label: __('Not set', 'classic-menu-block') }];
@@ -42,18 +44,35 @@ export default function Edit({ setAttributes, attributes, isSelected }) {
 		setAttributes({ menu: parseInt(value) });
 	};
 
+	const onSaveLang = (value) => {
+		setAttributes({ language: value });
+	};
+
+	const langOptions = [
+		{ value: 'all', label: 'For All Languages' },
+		{ value: 'en', label: 'English' },
+		{ value: 'fr', label: 'Français' }
+	];
+
 	return (
 		<div {...useBlockProps()}>
 			{isSelected || !menu ? (
 				<Placeholder
 					label={__('Classic menu', 'classic-menu-block')}
 					icon={icon}
+					isColumnLayout='true'
 				>
 					<SelectControl
-						label={__('Select a menu', 'classic-menu-block')}
+						label={__('Select a menu:', 'classic-menu-block')}
 						options={options}
 						value={menu}
 						onChange={onSaveMenu}
+					/>
+					<SelectControl
+						label={__('The menu is displayed for:', 'classic-menu-block')}
+						options={langOptions}
+						value={language}
+						onChange={onSaveLang}
 					/>
 				</Placeholder>
 			) : (

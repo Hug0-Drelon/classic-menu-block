@@ -17,6 +17,10 @@
 		"menu": {
 			"type": "number",
 			"default": 0
+		},
+		"language": {
+			"type": "string",
+			"default": "en"
 		}
 	},
 	"textdomain": "classic-menu-block",
